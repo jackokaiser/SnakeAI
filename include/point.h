@@ -22,11 +22,26 @@ class Point {
   Point& operator-= (const Point& rhs);
   friend Point operator- (const Point& lhs,const Point& rhs);
 
-  bool operator== (const Point& rhs);
+  friend bool operator< (const Point& lhs,const Point& rhs);
+  friend bool operator<= (const Point& lhs,const Point& rhs);
+
+  friend bool operator== (const Point& lhs,const Point& rhs);
   friend std::ostream& operator<< (std::ostream& s,const Point& lhs);
+
+  void operator() () const {};
 
 } ;
 
+
+namespace std {
+  template <> struct hash<Point>
+  {
+    size_t operator()(const Point & x) const
+    {
+      return hash<int>()(x.x+x.y);
+    }
+  };
+}
 
 
 #endif

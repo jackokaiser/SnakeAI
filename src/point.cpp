@@ -70,7 +70,18 @@ std::ostream& operator<< (std::ostream& s,const Point& lhs)
   return (s<<"( "<<lhs.x<<" , "<<lhs.y<<" )");
 }
 
-bool Point::operator== (const Point& rhs)
+bool operator== (const Point& lhs,const Point& rhs)
 {
-  return ((rhs.x==this->x)&&(rhs.y==this->y));
+  return ((rhs.x==lhs.x)&&(rhs.y==lhs.y));
 }
+
+bool operator< (const Point& lhs,const Point& rhs)
+{
+  return ((lhs.x<rhs.x) && (lhs.y<rhs.y));
+}
+
+bool operator<= (const Point& lhs,const Point& rhs)
+{
+  return (lhs<rhs) || (lhs==rhs);
+}
+

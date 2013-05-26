@@ -25,6 +25,9 @@ class Grid
   /* is point valid */
   bool isAvailable(const Point& p) const;
 
+  std::vector<Point> neighbors (const Point& p) const;
+  std::vector<Point> allNeighbors (const Point& p) const;
+
   unsigned int& operator[](const Point& p);
   unsigned int operator[](const Point& p) const;
 

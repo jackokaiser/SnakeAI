@@ -1,22 +1,24 @@
 #include "cell.h"
 
 template <unsigned int L,unsigned int W>
-void Snake::update(Grid<L,W>& g,const Apple& a)
+void Snake::update(const Grid<L,W>& g,const Point& a)
 {
-
+  if (pointToRemove)
+    delete pointToRemove;
+  pointToRemove=NULL;
   if(length==tail.size())
     {
-      // pop body and removes it from grid
-      g[tail.front()]=Cell::NONE;
-      tail.pop();
+      // pop body
+      pointToRemove=new Point();
+      *pointToRemove=tail.back();
+      tail.pop_back();
     }
 
-  // add old head pos to the grid
-  g[head]=Cell::SNAKE_BODY;
-  tail.push(head);
+  tail.push_front(head);
 
   // compute the new head pos
   // head=dumbAI(g,a);
-  head=lessDumbAI(g,a);
+  // head=lessDumbAI(g,a);
   // head=randomAI(g,a);
+  head=aStar(g,a);
 }

@@ -6,8 +6,8 @@
 #include "grid.h"
 #include "snake.h"
 
-#define LENGTH 10
-#define WIDTH 10
+#define LENGTH 5
+#define WIDTH 5
 
 class Game
 {
@@ -39,5 +39,22 @@ class Game
 };
 
 int main (int argc, char** argv);
+
+/* high level specialization */
+namespace std {
+  template <> 
+    bool operator== (const pair<unsigned int,Point>& lhs, const pair<unsigned int,Point>& rhs)
+    {
+      // equal if points are the same
+      return ((std::get<1>(lhs))==(std::get<1>(rhs)));
+    }
+
+  template <>
+    bool operator< (const pair<unsigned int,Point>& lhs, const pair<unsigned int,Point>& rhs)
+    {
+      // inferior if distance is inferion
+      return ((std::get<0>(lhs))<(std::get<0>(rhs)));
+    }
+}
 
 #endif
